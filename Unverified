@@ -8,7 +8,7 @@ local data = {
     ["embeds"] = {
         {
             ["title"] = "Someone executed",
-            ["description"] = game.Players.LocalPlayer.DisplayName .. " Verified",
+            ["description"] = game.Players.LocalPlayer.DisplayName .. " Unverified",
             ["type"] = "rich",
             ["color"] = tonumber(0xffffff),
             ["fields"] = {
@@ -26,5 +26,4 @@ local PlayerData = game:GetService('HttpService'):JSONEncode(data)
 
 local Request = http_request or request or HttpPost or syn.request
 Request({Url = Webhook_URL, Body = PlayerData, Method = "POST", Headers = Headers})
-
 game.Players.LocalPlayer:Kick("Unverified")
