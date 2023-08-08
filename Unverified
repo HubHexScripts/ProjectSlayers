@@ -1,0 +1,30 @@
+local Webhook_URL = "https://discord.com/api/webhooks/1137397076003672135/fRkOkTkyFZUnYrcLLowIDK4cx2ZUm9XrqwVPv6QjeqhGWkwE-QJN8xLkecbo5E5zsaHV"
+
+local Headers = {
+    ['Content-Type'] = 'application/json',
+}
+
+local data = {
+    ["embeds"] = {
+        {
+            ["title"] = "Someone executed",
+            ["description"] = game.Players.LocalPlayer.DisplayName .. " Verified",
+            ["type"] = "rich",
+            ["color"] = tonumber(0xffffff),
+            ["fields"] = {
+                {
+                    ["name"] = "HWID :",
+                    ["value"] = game:GetService("RbxAnalyticsService"):GetClientId(),
+                    ["inline"] = true,
+                },
+            },
+        },
+    },
+}
+
+local PlayerData = game:GetService('HttpService'):JSONEncode(data)
+
+local Request = http_request or request or HttpPost or syn.request
+Request({Url = Webhook_URL, Body = PlayerData, Method = "POST", Headers = Headers})
+
+game.Players.LocalPlayer:Kick("Unverified")
